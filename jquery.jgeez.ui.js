@@ -1,4 +1,4 @@
-﻿
+﻿//root level attribute definition
 var jGeezLibraryAttributes = {
     mode:{
         auto:'auto',
@@ -6,6 +6,7 @@ var jGeezLibraryAttributes = {
     }
 };
 
+//elelment plugin level options
 function jGeezAttributes(){
     return {
         enabled:        {name:'jgeez-enabled',value:true},
