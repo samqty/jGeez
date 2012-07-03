@@ -206,7 +206,11 @@ var JGeezUtility = {
                 range.select();
             }
         }
-    }
+    },
+    //holds information about the client's font status(if the user has geez font installed on his computer)
+    //by default it is assumed that the user does not have geez font installed
+    //this variable will be set by jgeez when the document is loaded
+    hasGeezFont:false
 };
 
 //main plugin code
