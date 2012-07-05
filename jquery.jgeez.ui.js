@@ -16,6 +16,7 @@ function jGeezAttributes(){
         helpbutton:     {name:'jgeez-helpbutton',value:""},
         showhelpbutton: {name:'jgeez-showhelpbutton',value:true},
         toggleshortcut: {name:'jgeez-toggleshortcut',value:"q"}
+        font:           {name:'jgeez-font',value="jiret"}
     };
 }
 
@@ -23,17 +24,26 @@ $(document).ready(function () {
 
     //detect if geez font exists
     //render the sample characters
-    _mode = $("script[src*='jgeez']").attr("mode");
+    _scriptheader=$("script[src*='jgeez']");
+    _mode =_scriptheader.attr("mode");
+    var _geezattributes = jGeezAttributes();
+    
     var _jg_random = Math.floor(Math.random() * 1000 + 1);
     $("body").append('<span id="s' + _jg_random + '" style="width:10px; font-size:30px;overflow:visible;">ሀ</span');
     $("body").append('<span id="s' + (_jg_random + 1) + '" style="width:10px; font-size:30px;overflow:visible;">መ</span');
 
     //check if the characters are rendered correctly by comparing their width
-    if ($("#s" + _jg_random).width() == $("#s" + (_jg_random + 1)).width()) {
+    //download geez font if the user doesn't have a font installed or opted out to use one of the fonts
+    //shipped with jgeez
+    _font=_scriptheader.attr(_geezattributes.font.name);
+    if ($("#s" + _jg_random).width() == $("#s" + (_jg_random + 1)).width()
+    || _font) {
+        //if font not specified then assignt the default value
+        if(!_font) _font=_geezattributes.font.value;
         //if not install geez
         $("<link>").appendTo($('head'))
                     .attr({ type: 'text/css', rel: 'stylesheet' })
-                    .attr('href', 'http://www.jgeez.com/cdn/styles/jiret/style.css');
+                    .attr('href', 'http://www.jgeez.com/cdn/styles/'+_font+'/style.css');
     }
     //remove the sample characters
     $("#s" + _jg_random).remove();
@@ -57,7 +67,6 @@ $(document).ready(function () {
 
         _geezinputs.each(function () {
 
-            var _geezattributes = jGeezAttributes();
             //collect all the attribute info here
             //enabled
             if ($(this).is("[" + _geezattributes.enabled.name + "]"))
