@@ -15,7 +15,7 @@ function jGeezAttributes(){
         showtogglebutton:{name:'jgeez-showtogglebutton',value:true},
         helpbutton:     {name:'jgeez-helpbutton',value:""},
         showhelpbutton: {name:'jgeez-showhelpbutton',value:true},
-        toggleshortcut: {name:'jgeez-toggleshortcut',value:"q"}
+        toggleshortcut: {name:'jgeez-toggleshortcut',value:"q"},
         font:           {name:'jgeez-font',value="jiret"}
     };
 }
