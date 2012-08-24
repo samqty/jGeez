@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
 Author : Samuel Teklu Cherinet
 Version : 1.1.0.0
 Date : April 25, 2012
@@ -206,7 +206,11 @@ var JGeezUtility = {
                 range.select();
             }
         }
-    }
+    },
+    //holds information about the client's font status(if the user has geez font installed on his computer)
+    //by default it is assumed that the user does not have geez font installed
+    //this variable will be set by jgeez when the document is loaded
+    hasGeezFont:false
 };
 
 //main plugin code
@@ -293,12 +297,12 @@ var JGeezUtility = {
                 if(_gbtn.length>0
                     &&_ebtn.length>0){
                         //on english button disable geez
-                        _ebtn.bind('click',{txtbox:$(this)},function(event){
+                        _ebtn.on('click',{txtbox:$(this)},function(event){
                             toggle(event.data.txtbox);
                             event.data.txtbox.focus();
                         });
                         //on geez button enable geez typing
-                        _gbtn.bind('click',{txtbox:$(this)}, function(event){
+                        _gbtn.on('click',{txtbox:$(this)}, function(event){
                             toggle(event.data.txtbox);
                             event.data.txtbox.focus();
                         });
@@ -323,7 +327,7 @@ var JGeezUtility = {
                }
 
             //shortcut toggle
-            $(this).keyup(function(event){
+            $(this).on('keyup',function(event){
             //load settings
             _options=$(this).data("jGeez");
             if(event.altKey
@@ -335,7 +339,7 @@ var JGeezUtility = {
                 }
             });
 
-            $(this).keypress(function (event) {
+            $(this).on('keypress',function (event) {
             //load settings
                 _options=$(this).data("jGeez");
                 //check if the character pressed is printable
