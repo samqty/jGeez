@@ -1,4 +1,4 @@
-/*
+﻿﻿﻿/*
 Author : Samuel Teklu Cherinet
 Version : 1.1.0.0
 Date : April 25, 2012
@@ -213,7 +213,25 @@ var JGeezUtility = {
     hasGeezFont:false,
     //holds data about all the instance of the elements on which jgeez has been applied to
     //this info is separted out of the element is because, information is lost when AJAX calls disrupt the DOM structure
-    instances:[]
+    instances:[],
+    //this method will bind events that are queued up for each of the jgeez instance elemetns on the page
+    //it is particulary used to combat the issue of AJAX disrupting the events binding on the DOM
+    bindEvents:function(){
+    //go through all the event handlers and rebind them to the element jgeez plugin is applied on
+    for(o in JGeezUtility.instances){
+        //check if the event has already been handled
+        //so that multiple event handlers wouldn't be bound to the element
+        target=$(":[jgeez-index="+o+"]");
+        if(!target.data("events")){
+            options=JGeezUtility.instances[o];
+            for(e in options.eventHandlers){
+                    options.eventHandlers[e].element.on(options.eventHandlers[e].event,
+                    options.eventHandlers[e].data,
+                    options.eventHandlers[e].handler);
+                }
+            }
+        }
+    }
 };
 
 //main plugin code
