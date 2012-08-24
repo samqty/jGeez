@@ -1,4 +1,4 @@
-﻿/*
+/*
 Author : Samuel Teklu Cherinet
 Version : 1.1.0.0
 Date : April 25, 2012
@@ -210,7 +210,10 @@ var JGeezUtility = {
     //holds information about the client's font status(if the user has geez font installed on his computer)
     //by default it is assumed that the user does not have geez font installed
     //this variable will be set by jgeez when the document is loaded
-    hasGeezFont:false
+    hasGeezFont:false,
+    //holds data about all the instance of the elements on which jgeez has been applied to
+    //this info is separted out of the element is because, information is lost when AJAX calls disrupt the DOM structure
+    instances:[]
 };
 
 //main plugin code
@@ -233,8 +236,23 @@ var JGeezUtility = {
             //changes the pre-existing options on the plugin
             //is used after the plugin is initialized
             changeoptions:function(options){
-                var _options=$.extend($(this).data("jGeez"),options);
-                $(this).data("jGeez",options);
+                _options=JGeezUtility.instances[$(this).attr("jgeez-index")];
+                _options=$.extend(_options,options);
+                $(this).data("jGeez",_options);
+            },
+            //allows developers to reattach events that might be lost during an AJAX call
+            reattachevents:function(){
+            //go through all the event handlers and rebind them to the element
+            options=JGeezUtility.instances[$(this).attr("jgeez-index")];
+            //check if the event has already been handled
+            //so that multiple event handlers wouldn't be bound to the element
+            if(!$(this).data("events")){
+             for(e in options.eventHandlers){
+                    options.eventHandlers[e].element.on(options.eventHandlers[e].event,
+                    options.eventHandlers[e].data,
+                    options.eventHandlers[e].handler);
+                }
+              }
             },
             //initializes the textbox with all sorts of options
             //options definition
@@ -253,24 +271,25 @@ var JGeezUtility = {
                 'toggleshortcut':'q'
             },options);
 
-            $(this).data("jGeez",options);
+            //hold reference to the event handlers
+            options.eventHandlers=[];
+
+            //add reference to the index of this textbox in the jgeez instance on the page
+            $(this).attr("jgeez-index",JGeezUtility.instances.length);
+            JGeezUtility.instances.push(options);
 
             //show help button
             if(options.showhelpbutton){
                 _help= $("#"+options.helpbutton);
                 _help.attr("href", "http://jgeez.com/home/help");
                 _help.attr("target", "_blank");
-                /*_help.bind('click',{txtbox:$(this)},function(event){
-                    event.data.txtbox.focus();
-                });*/
-                //_help.insertAfter($(this));
             }
 
             //is used to change the current mode of writing
             //and handles the UI change as well
             function toggle(txtbox){
                 //load settings
-                _options=txtbox.data("jGeez");
+                _options=JGeezUtility.instances[txtbox.attr("jgeez-index")];
                 __gbtn = $("#"+_options.geezbutton);
                 __ebtn = $("#"+_options.englishbutton);
                 _options.enabled=!_options.enabled;
@@ -297,15 +316,26 @@ var JGeezUtility = {
                 if(_gbtn.length>0
                     &&_ebtn.length>0){
                         //on english button disable geez
-                        _ebtn.on('click',{txtbox:$(this)},function(event){
+                        options.eventHandlers.push({
+                            element:_ebtn,
+                            event:'click',
+                            data:{txtbox:$(this)},
+                            handler:function(event){
                             toggle(event.data.txtbox);
                             event.data.txtbox.focus();
+                            }
                         });
+
                         //on geez button enable geez typing
-                        _gbtn.on('click',{txtbox:$(this)}, function(event){
+                         options.eventHandlers.push({
+                            element:_gbtn,
+                            event:'click',
+                            data:{txtbox:$(this)},
+                            handler:function(event){
                             toggle(event.data.txtbox);
                             event.data.txtbox.focus();
-                        });
+                            }
+                        });                       
 
                         //if the show toggle button options is not selected hide both buttons
                         if(!options.showtogglebutton){
@@ -327,21 +357,29 @@ var JGeezUtility = {
                }
 
             //shortcut toggle
-            $(this).on('keyup',function(event){
-            //load settings
-            _options=$(this).data("jGeez");
-            if(event.altKey
-                    ||event.ctrlKey
-                    ||!JGeezUtility.Print.isPrintable(event.which)){
-                    //handle ctrl shortcut values(toggle)
-                    if(String.fromCharCode(event.which).toLowerCase()==_options.toggleshortcut.toLowerCase())
-                        toggle($(this));
+            options.eventHandlers.push({
+            element:$(this),
+            event:'keyup',
+            handler:function(event){
+                //load settings
+                _options=JGeezUtility.instances[$(this).attr("jgeez-index")];
+                if(event.altKey
+                        ||event.ctrlKey
+                        ||!JGeezUtility.Print.isPrintable(event.which)){
+                        //handle ctrl shortcut values(toggle)
+                        if(String.fromCharCode(event.which).toLowerCase()==_options.toggleshortcut.toLowerCase())
+                            toggle($(this));
+                    }
                 }
             });
 
-            $(this).on('keypress',function (event) {
+
+            options.eventHandlers.push({
+            element:$(this),
+            event:'keypress',
+            handler:function (event) {
             //load settings
-                _options=$(this).data("jGeez");
+                _options=JGeezUtility.instances[$(this).attr("jgeez-index")];
                 //check if the character pressed is printable
                 //ignore anything that will not be displayed (alt,ctrl ...)
                 //ignore key presses for short cut keys (combination of alt+key or ctrl+key)
@@ -406,7 +444,15 @@ var JGeezUtility = {
                     //so that the default character is not displayed
                     event.preventDefault();
                 }
-            });
+            }
+        });
+
+        //attach the event handlers queued up for this handler
+        for(e in options.eventHandlers){
+                options.eventHandlers[e].element.on(options.eventHandlers[e].event,
+                options.eventHandlers[e].data,
+                options.eventHandlers[e].handler);
+            }
         }
       };
    }
