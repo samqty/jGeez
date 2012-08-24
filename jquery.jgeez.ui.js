@@ -45,9 +45,15 @@ $(document).ready(function () {
                     .attr({ type: 'text/css', rel: 'stylesheet' })
                     .attr('href', 'http://www.jgeez.com/cdn/styles/'+_font+'/style.css');
     }
+    
     //remove the sample characters
     $("#s" + _jg_random).remove();
     $("#s" + (_jg_random + 1)).remove();
+
+    //add code to automatically relink events handlers upon ajax call completion
+    $("body").ajaxComplete(function(){
+        JGeezUtility.bindEvents();
+    });
 
     if (_mode == jGeezLibraryAttributes.mode.auto) {
         //button styles
