@@ -222,13 +222,14 @@ var JGeezUtility = {
         //check if the event has already been handled
         //so that multiple event handlers wouldn't be bound to the element
         target=$(":[jgeez-index="+o+"]");
-        if(!target.data("events")){
+        if(!target.data("jgeez-event")){
             options=JGeezUtility.instances[o];
             for(e in options.eventHandlers){
                     options.eventHandlers[e].element.on(options.eventHandlers[e].event,
                     options.eventHandlers[e].data,
                     options.eventHandlers[e].handler);
                 }
+                target.data("jgeez-event",true)
             }
         }
     }
@@ -264,12 +265,13 @@ var JGeezUtility = {
             options=JGeezUtility.instances[$(this).attr("jgeez-index")];
             //check if the event has already been handled
             //so that multiple event handlers wouldn't be bound to the element
-            if(!$(this).data("events")){
+            if(!$(this).data("jgeez-event")){
              for(e in options.eventHandlers){
                     options.eventHandlers[e].element.on(options.eventHandlers[e].event,
                     options.eventHandlers[e].data,
                     options.eventHandlers[e].handler);
                 }
+                 $(this).data("jgeez-event",true)
               }
             },
             //initializes the textbox with all sorts of options
