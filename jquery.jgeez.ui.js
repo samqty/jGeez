@@ -72,6 +72,8 @@ $(document).ready(function () {
             _geezinputs = $("input,textarea");
 
         _geezinputs.each(function () {
+            //reset the geez attributes for each input
+            _geezattributes = jGeezAttributes();
 
             //collect all the attribute info here
             //enabled
