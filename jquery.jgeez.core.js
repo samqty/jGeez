@@ -538,7 +538,7 @@ JGeezUtility.UNICODEMatrix=
     [0x1338, 't', true, true],
     [0x1340, 'T',false,true],
     [0x1348, 'f'],
-    [0x1350, 'P'],
+    [0x1350, 'p'],
     [0x12A0, 'a'],
     [0x12A1, 'u'],
     [0x12A2, 'i'],
