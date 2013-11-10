@@ -1,0 +1,26 @@
+Unit testing setup
+
+-library attributes
+	-jgeez-mode : auto,manual
+	-jgeez-font : 
+-input attributes
+	-jgeez-enabled
+	-jgeez-englishbutton
+	-jgeez-geezbutton
+	-jgeez-showtogglebutton
+	-jgeez-helpbutton
+	-jgeez-showhelpbutton
+	-jgeez-toggleshortcut
+
+-plugin init options
+	-enabled
+	-englishbutton
+	-geezbutton
+	-showtogglebutton
+	-helpbutton
+	-showhelpbutton
+	-toggleshortcut
+-changing options with javascript
+-access to all versions of jgeez library from jgeez.com
+
+Unit testing features

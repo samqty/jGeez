@@ -24,7 +24,7 @@ $(document).ready(function () {
 
     //detect if geez font exists
     //render the sample characters
-    _scriptheader=$("script[src*='jgeez']");
+    _scriptheader=$("script[src*='jquery.jgeez']");
     _mode =_scriptheader.attr("mode");
     var _geezattributes = jGeezAttributes();
     

@@ -538,14 +538,16 @@ JGeezUtility.UNICODEMatrix=
     [0x1338, 't', true, true],
     [0x1340, 'T',false,true],
     [0x1348, 'f'],
-    [0x1350, 'p'],
+    [0x1350, 'P'],
     [0x12A0, 'a'],
     [0x12A1, 'u'],
     [0x12A2, 'i'],
     [0x12A4, 'e'],
     [0x12A6, 'o'],
     [0x12E8, 'y']
-];//root level attribute definition
+];
+
+﻿//root level attribute definition
 var jGeezLibraryAttributes = {
     mode:{
         auto:'auto',
@@ -619,8 +621,6 @@ $(document).ready(function () {
             _geezinputs = $("input,textarea");
 
         _geezinputs.each(function () {
-            //reset the geez attributes for each input
-            _geezattributes = jGeezAttributes();
 
             //collect all the attribute info here
             //enabled
