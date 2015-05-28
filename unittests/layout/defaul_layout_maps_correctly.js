@@ -1,4 +1,4 @@
-﻿//create an isolated box
+//create an isolated box
 //var box = $("<iframe><html><head></head></html></iframe>");
 box = $("html");
 
@@ -661,71 +661,71 @@ test('can map ቆ to q + o', function () {
     equal(_geezinput.val(), "ቆ", "ቆ is not correctly mapped");
 });
 
-test('can map ቊ to q ', function () {
+test('can map ቊ to q + shift ', function () {
     var _geezinput = $("<input type='text'/>");
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "q ".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "Q".charCodeAt(0), shiftKey: true }));
     equal(_geezinput.val(), "ቊ", "ቊ is not correctly mapped");
 });
 
-test('can map ቋ to q  + u', function () {
+test('can map ቋ to q  + u + shift', function () {
     var _geezinput = $("<input type='text'/>");
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "q ".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "Q".charCodeAt(0) }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "u".charCodeAt(0) }));
     equal(_geezinput.val(), "ቋ", "ቋ is not correctly mapped");
 });
 
-test('can map ቌ to q  + i', function () {
+test('can map ቌ to q  + i + shift', function () {
     var _geezinput = $("<input type='text'/>");
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "q ".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "Q".charCodeAt(0) }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "i".charCodeAt(0) }));
     equal(_geezinput.val(), "ቌ", "ቌ is not correctly mapped");
 });
 
-test('can map ቍ to q  + a', function () {
+test('can map ቍ to q  + a + shift', function () {
     var _geezinput = $("<input type='text'/>");
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "q ".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "Q".charCodeAt(0) }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "a".charCodeAt(0) }));
     equal(_geezinput.val(), "ቍ", "ቍ is not correctly mapped");
 });
 
-test('can map ቎ to q  + y', function () {
+test('can map ቎ to q  + y + shift', function () {
     var _geezinput = $("<input type='text'/>");
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "q ".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "Q".charCodeAt(0) }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "y".charCodeAt(0) }));
     equal(_geezinput.val(), "቎", "቎ is not correctly mapped");
 });
 
-test('can map ቏ to q  + e', function () {
+test('can map ቏ to q  + e + shift', function () {
     var _geezinput = $("<input type='text'/>");
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "q ".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "Q".charCodeAt(0) }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "e".charCodeAt(0) }));
     equal(_geezinput.val(), "቏", "቏ is not correctly mapped");
 });
 
-test('can map ቐ to q  + o', function () {
+test('can map ቐ to q  + o + shift', function () {
     var _geezinput = $("<input type='text'/>");
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "q ".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "Q".charCodeAt(0) }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "o".charCodeAt(0) }));
     equal(_geezinput.val(), "ቐ", "ቐ is not correctly mapped");
 });
@@ -1356,7 +1356,7 @@ test('can map ኸ to H + Caps', function () {
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "H".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "H".charCodeAt(0), shiftKey: false }));
     equal(_geezinput.val(), "ኸ", "ኸ is not correctly mapped");
 });
 
@@ -2253,7 +2253,7 @@ test('can map ፀ to T + Caps', function () {
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0),shiftKey:false }));
     equal(_geezinput.val(), "ፀ", "ፀ is not correctly mapped");
 });
 
@@ -2262,7 +2262,7 @@ test('can map ፁ to T + u + Caps', function () {
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0), shiftKey: false }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "u".charCodeAt(0) }));
     equal(_geezinput.val(), "ፁ", "ፁ is not correctly mapped");
 });
@@ -2272,7 +2272,7 @@ test('can map ፂ to T + i + Caps', function () {
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0), shiftKey: false }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "i".charCodeAt(0) }));
     equal(_geezinput.val(), "ፂ", "ፂ is not correctly mapped");
 });
@@ -2282,7 +2282,7 @@ test('can map ፃ to T + a + Caps', function () {
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0), shiftKey: false }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "a".charCodeAt(0) }));
     equal(_geezinput.val(), "ፃ", "ፃ is not correctly mapped");
 });
@@ -2292,7 +2292,7 @@ test('can map ፄ to T + y + Caps', function () {
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0), shiftKey: false }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "y".charCodeAt(0) }));
     equal(_geezinput.val(), "ፄ", "ፄ is not correctly mapped");
 });
@@ -2302,7 +2302,7 @@ test('can map ፅ to T + e + Caps', function () {
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0), shiftKey: false }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "e".charCodeAt(0) }));
     equal(_geezinput.val(), "ፅ", "ፅ is not correctly mapped");
 });
@@ -2312,7 +2312,7 @@ test('can map ፆ to T + o + Caps', function () {
     testcontainer.append(_geezinput);
     _geezinput.jGeez();
 
-    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0) }));
+    _geezinput.trigger(jQuery.Event('keypress', { which: "T".charCodeAt(0), shiftKey: false }));
     _geezinput.trigger(jQuery.Event('keypress', { which: "o".charCodeAt(0) }));
     equal(_geezinput.val(), "ፆ", "ፆ is not correctly mapped");
 });
