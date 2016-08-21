@@ -1,0 +1,4 @@
+jGeez is a simple javascript library (AKA JQuery plugin) that enables web developers to easily integrate geez/amharic online typing in their web applications. below is a simple demonistartion of its implementation:
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script> 
+<script type="text/javascript" src="http://www.jgeez.com/cdn/jquery.jgeez.min.js"></script>
